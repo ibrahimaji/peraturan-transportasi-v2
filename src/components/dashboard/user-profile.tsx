@@ -19,7 +19,7 @@ export async function UserProfile() {
         </div>
       ) : (
         <Button asChild>
-          <a href="/api/auth/login'" className="bg-[#3498db] font-poppins text-[#FFF] ">Masuk</a>
+          <a href="/api/auth/login" className="bg-[#3498db] font-poppins text-[#FFF] ">Masuk</a>
         </Button>
       )}
     </div>
