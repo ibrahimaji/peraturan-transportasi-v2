@@ -1,13 +1,14 @@
-'use client';
-
-import React from 'react';
+import { Loader2 } from 'lucide-react';
+import React, { Suspense } from 'react';
 import Image from 'next/image';
-import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
 import { Button } from '../ui/button';
-import { DialogButton } from './dialogButton';
+import { UserProfile } from './user-profile';
+
+export const Icons = {
+  Spinner: Loader2,
+};
 
 export const Navbar = () => {
-  const { isSignedIn } = useUser();
   return (
     <div className="py-2 border-b w-full z-10 top-0">
       <div className="container flex items-center justify-between">
@@ -15,16 +16,9 @@ export const Navbar = () => {
         <div className="flex items-center gap-[28px]">
           <Button variant="link" className="text-[#828282] font-poppins">Dashboard</Button>
           <Button variant="link" className="text-[#828282] font-poppins">Tentang</Button>
-          {isSignedIn ? (
-            <>
-              <DialogButton />
-              <UserButton afterSignOutUrl="/" />
-            </>
-          ) : (
-            <SignInButton>
-              <Button variant="link" className="bg-[#3498db] font-poppins text-[#FFF] ">Masuk</Button>
-            </SignInButton>
-          )}
+          <Suspense fallback={<Icons.Spinner className="h-4 w-4 animate-spin" />}>
+            <UserProfile />
+          </Suspense>
         </div>
       </div>
     </div>
