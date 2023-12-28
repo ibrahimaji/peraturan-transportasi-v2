@@ -1,9 +1,10 @@
+import { API_URL } from '@/config/apiUrl';
 import { Document, columns } from './columns';
 import { DataTable } from './data-table';
 
 async function getData(): Promise<Document[]> {
   // Fetch data from your API here.
-  const res = await fetch('http://localhost:3000/api/peraturan', {
+  const res = await fetch(`${API_URL}/api/peraturan`, {
     cache: 'no-store',
   });
   const data = await res.json();
