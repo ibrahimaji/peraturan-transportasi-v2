@@ -1,3 +1,4 @@
+import { ClerkProvider } from '@clerk/nextjs'
 import '@/styles/globals.css';
 import { twMerge } from 'tailwind-merge';
 import { Providers } from '@/components/providers';
@@ -16,13 +17,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={twMerge(fontSans.className)}>
-        <Navbar />
-        <Providers>{children}</Providers>
-        <Toaster />
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={twMerge(fontSans.className)}>
+          <Navbar />
+          <Providers>{children}</Providers>
+          <Toaster />
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

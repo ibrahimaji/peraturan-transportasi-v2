@@ -17,6 +17,9 @@
     "schema": "./src/db/prisma/schema.prisma"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.29.1",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "@hookform/resolvers": "^3.3.2",
     "@prisma/client": "^5.7.1",
     "@radix-ui/react-dialog": "^1.0.5",

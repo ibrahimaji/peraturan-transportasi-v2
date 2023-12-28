@@ -1,7 +1,8 @@
+/* eslint-disable */
 import Link from 'next/link';
 import React from 'react';
 import { InstagramIcon, TwitterIcon } from 'lucide-react';
-
+import { Button } from '../ui/button';
 
 export const Footer = () => {
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client';
 
 import * as z from 'zod';
@@ -10,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '../ui/use-toast';
 
 const formSchema = z.object({
-  namaPeraturan: z.string(),
+  nama: z.string(),
   kategori: z.enum(['LLAJ', 'Perkeretaapian']),
   jenisPeraturan: z.enum(['Undang-Undang', 'Peraturan Presiden', 'Peraturan Pemerintah', 'Peraturan Menteri']),
   link: z.string().url(),
@@ -34,17 +35,52 @@ export default function TambahPeraturan() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      namaPeraturan: '',
+      nama: '',
       link: '',
     },
   });
-  // const jenisPeraturan = form.watch('jenisPeraturan');
-  // const kategori = form.watch('kategori');
-  const handleSubmit = (/* values: z.infer<typeof formSchema> */) => {
-    // console.log({ values });
-    toast({
-      description: 'Anda telah menambah peraturan',
-    });
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    const { nama, kategori, jenisPeraturan, link } = values;
+    try {
+      const res = await fetch('/api/peraturan', {
+        method: 'POST',
+        cache: 'no-cache',
+        body: JSON.stringify({ nama, kategori, jenisPeraturan, link })
+      })
+      if (res.ok) {
+        toast({
+          description: 'Berhasil menambah peraturan',
+        });
+      } else {
+        // Handle different status codes
+        switch (res.status) {
+          case 400:
+            toast({
+              description: 'Data yang anda masukkan tidak valid',
+            });
+            break;
+          case 401:
+            toast({
+              description: 'Anda harus login terlebih dahulu',
+            });
+            break;
+          case 500:
+            toast({
+              description: 'Terjadi kesalahan pada server',
+            });
+            break;
+          default:
+            toast({
+              description: 'Terjadi kesalahan yang tidak diketahui',
+            });
+        }
+      }
+    } catch (error) {
+      console.log("Error", error);
+      toast({
+        description: 'Gagal menambah peraturan',
+      });
+    }
   };
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -52,7 +88,7 @@ export default function TambahPeraturan() {
         <form onSubmit={form.handleSubmit(handleSubmit)} className="max-w-md w-full flex flex-col gap-4">
           <FormField
             control={form.control}
-            name="namaPeraturan"
+            name="nama"
             render={({ field }) => {
               return (
                 <FormItem>
