@@ -19,9 +19,9 @@ export async function POST(req: NextRequest) {
         jenisPeraturan,
         kategori,
         link,
-      }
+      },
     });
-    return NextResponse.json(dokumen)
+    return NextResponse.json(dokumen);
   } catch (error) {
     return NextResponse.json(error);
   }

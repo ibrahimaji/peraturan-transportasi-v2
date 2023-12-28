@@ -1,9 +1,10 @@
-"use client"
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
+import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
 import { Button } from '../ui/button';
 import { DialogButton } from './dialogButton';
-import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
 
 export const Navbar = () => {
   const { isSignedIn } = useUser();
@@ -17,14 +18,13 @@ export const Navbar = () => {
           {isSignedIn ? (
             <>
               <DialogButton />
-              <UserButton afterSignOutUrl='/' />
+              <UserButton afterSignOutUrl="/" />
             </>
           ) : (
             <SignInButton>
               <Button variant="link" className="bg-[#3498db] font-poppins text-[#FFF] ">Masuk</Button>
             </SignInButton>
-          )
-          }
+          )}
         </div>
       </div>
     </div>

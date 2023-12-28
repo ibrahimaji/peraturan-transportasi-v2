@@ -1,4 +1,4 @@
-import { ClerkProvider } from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs';
 import '@/styles/globals.css';
 import { twMerge } from 'tailwind-merge';
 import { Providers } from '@/components/providers';
