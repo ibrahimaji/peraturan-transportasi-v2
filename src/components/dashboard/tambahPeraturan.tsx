@@ -46,14 +46,13 @@ export default function TambahPeraturan() {
     try {
       const res = await fetch('/api/peraturan', {
         method: 'POST',
-        cache: 'no-cache',
+        cache: 'no-store',
         body: JSON.stringify({ nama, kategori, jenisPeraturan, link })
       })
       if (res.ok) {
         toast({
           description: 'Berhasil menambah peraturan',
         });
-        router.refresh()
       } else {
         // Handle different status codes
         switch (res.status) {
