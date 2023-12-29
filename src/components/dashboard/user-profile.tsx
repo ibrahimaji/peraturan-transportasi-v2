@@ -13,6 +13,7 @@ export async function UserProfile() {
       {session?.user ? (
         <div className="flex items-center gap-[28px]">
           <DialogButton />
+          <div>Hello admin!</div>
           <Button asChild>
             <a href="/api/auth/logout" className="bg-[#3498db] font-poppins text-[#FFF] ">Keluar</a>
           </Button>

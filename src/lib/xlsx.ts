@@ -1,9 +1,10 @@
 import xlsx, { IJsonSheet } from 'json-as-xlsx';
 import { Document } from '@/components/table/columns';
+import { API_URL } from '@/config/apiUrl';
 
 async function getData(): Promise<Document[]> {
   // Fetch data from your API here.
-  const res = await fetch('http://localhost:3000/api/peraturan', {
+  const res = await fetch(`${API_URL}/api/peraturan`, {
     cache: 'no-store',
   });
   const data = await res.json();

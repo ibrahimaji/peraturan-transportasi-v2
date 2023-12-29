@@ -5,7 +5,7 @@ import { DataTable } from './data-table';
 async function getData(): Promise<Document[]> {
   // Fetch data from your API here.
   const res = await fetch(`${API_URL}/api/peraturan`, {
-    cache: 'no-store',
+    cache: 'no-cache',
   });
   const data = await res.json();
   return data;
