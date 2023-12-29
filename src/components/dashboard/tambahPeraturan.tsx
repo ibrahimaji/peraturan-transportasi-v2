@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '../ui/use-toast';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   nama: z.string(),
@@ -40,6 +41,7 @@ export default function TambahPeraturan() {
     },
   });
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    const router = useRouter();
     const { nama, kategori, jenisPeraturan, link } = values;
     try {
       const res = await fetch('/api/peraturan', {
@@ -51,6 +53,7 @@ export default function TambahPeraturan() {
         toast({
           description: 'Berhasil menambah peraturan',
         });
+        router.refresh()
       } else {
         // Handle different status codes
         switch (res.status) {
