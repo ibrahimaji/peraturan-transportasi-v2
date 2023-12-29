@@ -50,10 +50,10 @@ export default function TambahPeraturan() {
         body: JSON.stringify({ nama, kategori, jenisPeraturan, link })
       })
       if (res.ok) {
+        router.refresh()
         toast({
           description: 'Berhasil menambah peraturan',
         });
-        router.refresh()
       } else {
         // Handle different status codes
         switch (res.status) {
