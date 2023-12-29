@@ -2,6 +2,7 @@
 'use client';
 
 import * as z from 'zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -40,6 +41,7 @@ export default function TambahPeraturan() {
     },
   });
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    const router = useRouter();
     const { nama, kategori, jenisPeraturan, link } = values;
     try {
       const res = await fetch('/api/peraturan', {
@@ -51,6 +53,7 @@ export default function TambahPeraturan() {
         toast({
           description: 'Berhasil menambah peraturan',
         });
+        router.refresh()
       } else {
         // Handle different status codes
         switch (res.status) {
