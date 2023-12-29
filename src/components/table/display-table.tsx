@@ -2,7 +2,6 @@ import { API_URL } from '@/config/apiUrl';
 import { Document, columns } from './columns';
 import { DataTable } from './data-table';
 
-export const revalidate = 0;
 
 async function getData(): Promise<Document[]> {
   // Fetch data from your API here.
