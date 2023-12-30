@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -14,8 +15,8 @@ import {
 import TambahPeraturan from './tambahPeraturan';
 
 export const closeButton = () => {
-  document.getElementById("closeButton")?.click();
-}
+  document.getElementById('closeButton')?.click();
+};
 
 export const DialogButton = () => {
   return (

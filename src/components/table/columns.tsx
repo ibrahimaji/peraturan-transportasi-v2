@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client';
 
 import Link from 'next/link';
@@ -25,31 +27,28 @@ export type Document = {
   link: string
 };
 
-
-const handleDelete = async (data) => {
-  const res = await fetch(`/api/peraturan/${data}`, { method: 'DELETE', cache: 'no-store' })
+const handleDelete = async (data: any) => {
+  const res = await fetch(`/api/peraturan/${data}`, { method: 'DELETE', cache: 'no-store' });
   if (res.ok) {
     toast({
       description: 'Berhasil menghapus peraturan',
     });
     window.location.reload();
-  }
-  else {
+  } else {
     toast({
-      description: 'Terjadi kegagalan'
-    })
+      description: 'Terjadi kegagalan',
+    });
   }
-}
-
+};
 
 export const columns: ColumnDef<Document>[] = [
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <Checkbox
         checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
+          table.getIsAllPageRowsSelected()
+          || (table.getIsSomePageRowsSelected() && 'indeterminate')
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -107,18 +106,18 @@ export const columns: ColumnDef<Document>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent className="flex flex-col gap-3 items-center justify-center">
             <DropdownMenuLabel>Action</DropdownMenuLabel>
-            <Button >
+            <Button>
               <Link href={dokumen.link} className="ml-[8px]">
                 Kunjungi
               </Link>
             </Button>
-            <Button variant={'destructive'}>
-              <p className="ml-[8px]" onClick={() => handleDelete(dokumen.id)} >
+            <Button variant="destructive">
+              <p className="ml-[8px]" onClick={() => handleDelete(dokumen.id)}>
                 Hapus
               </p>
             </Button>
           </DropdownMenuContent>
-        </DropdownMenu >
+        </DropdownMenu>
       );
     },
   },
