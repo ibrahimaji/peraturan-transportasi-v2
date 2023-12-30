@@ -13,6 +13,10 @@ import {
 } from '@/components/ui/dialog';
 import TambahPeraturan from './tambahPeraturan';
 
+export const closeButton = () => {
+  document.getElementById("closeButton")?.click();
+}
+
 export const DialogButton = () => {
   return (
     <Dialog>
@@ -31,7 +35,7 @@ export const DialogButton = () => {
         </div>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button id="closeButton" type="button" variant="secondary">
               Close
             </Button>
           </DialogClose>

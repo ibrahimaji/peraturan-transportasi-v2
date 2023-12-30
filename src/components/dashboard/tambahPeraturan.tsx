@@ -9,7 +9,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '../ui/use-toast';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+import { closeButton } from './dialogButton';
 
 const formSchema = z.object({
   nama: z.string(),
@@ -31,7 +32,9 @@ const formSchema = z.object({
   message: 'Pilih jenis peraturan terlebih dahulu',
   path: ['jenisPeraturan'],
 });
+
 export default function TambahPeraturan() {
+  const router = useRouter();
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,9 +43,9 @@ export default function TambahPeraturan() {
       link: '',
     },
   });
+
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     const { nama, kategori, jenisPeraturan, link } = values;
-    const router = useRouter()
     try {
       const res = await fetch('/api/peraturan', {
         method: 'POST',
@@ -52,7 +55,8 @@ export default function TambahPeraturan() {
         toast({
           description: 'Berhasil menambah peraturan',
         });
-        router.push('/')
+        router.refresh();
+        closeButton();
       } else {
         // Handle different status codes
         switch (res.status) {

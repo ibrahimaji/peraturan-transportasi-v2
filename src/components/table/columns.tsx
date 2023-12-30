@@ -12,6 +12,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '../ui/button';
+import { Checkbox } from '../ui/checkbox';
+import { toast } from '../ui/use-toast';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -23,7 +25,48 @@ export type Document = {
   link: string
 };
 
+
+const handleDelete = async (data) => {
+  const res = await fetch(`/api/peraturan/${data}`, { method: 'DELETE', cache: 'no-store' })
+  if (res.ok) {
+    toast({
+      description: 'Berhasil menghapus peraturan',
+    });
+    window.location.reload();
+  }
+  else {
+    toast({
+      description: 'Terjadi kegagalan'
+    })
+  }
+}
+
+
 export const columns: ColumnDef<Document>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={
+          (value) => row.toggleSelected(!!value)
+        }
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: 'nama',
     header: ({ column }) => {
@@ -47,6 +90,11 @@ export const columns: ColumnDef<Document>[] = [
     header: 'Kategori',
   },
   {
+    accessorKey: 'id',
+    header: 'ID',
+
+  },
+  {
     id: 'actions',
     cell: ({ row }) => {
       const dokumen = row.original;
@@ -57,14 +105,20 @@ export const columns: ColumnDef<Document>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent className="flex flex-col gap-3 items-center justify-center">
             <DropdownMenuLabel>Action</DropdownMenuLabel>
-            <Link href={dokumen.link} className="ml-[8px]">
-              Unduh
-            </Link>
-
+            <Button >
+              <Link href={dokumen.link} className="ml-[8px]">
+                Kunjungi
+              </Link>
+            </Button>
+            <Button variant={'destructive'}>
+              <p className="ml-[8px]" onClick={() => handleDelete(dokumen.id)} >
+                Hapus
+              </p>
+            </Button>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu >
       );
     },
   },
