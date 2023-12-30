@@ -55,7 +55,8 @@ export default function TambahPeraturan() {
         toast({
           description: 'Berhasil menambah peraturan',
         });
-        router.refresh();
+        // router.refresh();
+        window.location.reload()
         closeButton();
       } else {
         // Handle different status codes
