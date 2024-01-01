@@ -2,7 +2,11 @@
 import prisma from '@/db/utils/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest, { params }: { params: any }) {
+interface ParamsProps {
+  params: { id: string }
+}
+
+export async function GET(_: NextRequest, { params }: ParamsProps) {
   const { id } = params;
   try {
     const dokumen = await prisma.dokumen.findFirst({
@@ -16,7 +20,7 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: any }) {
+export async function DELETE(_: NextRequest, { params }: ParamsProps) {
   const { id } = params;
   try {
     const findDokumen = await prisma.dokumen.findFirst({
