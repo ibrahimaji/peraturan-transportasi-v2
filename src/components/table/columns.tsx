@@ -111,6 +111,83 @@ export const columns: ColumnDef<Document>[] = [
                 Kunjungi
               </Link>
             </Button>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+  },
+];
+
+export const columnsAdmin: ColumnDef<Document>[] = [
+  {
+    id: 'select',
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected()
+          || (table.getIsSomePageRowsSelected() && 'indeterminate')
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={
+          (value) => row.toggleSelected(!!value)
+        }
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'nama',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Nama
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: 'jenisPeraturan',
+    header: 'Jenis Peraturan',
+  },
+  {
+    accessorKey: 'kategori',
+    header: 'Kategori',
+  },
+  {
+    accessorKey: 'id',
+    header: 'ID',
+
+  },
+  {
+    id: 'actions',
+    cell: ({ row }) => {
+      const dokumen = row.original;
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="w-8 h-8 p-0">
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="flex flex-col gap-3 items-center justify-center">
+            <DropdownMenuLabel>Action</DropdownMenuLabel>
+            <Button>
+              <Link href={dokumen.link} className="ml-[8px]">
+                Kunjungi
+              </Link>
+            </Button>
             <Button variant="destructive">
               <p className="ml-[8px]" onClick={() => handleDelete(dokumen.id)}>
                 Hapus
