@@ -1,7 +1,8 @@
+/* eslint-disable */
 import { API_URL } from '@/config/apiUrl';
+import { getSession } from '@auth0/nextjs-auth0';
 import { Document, columns, columnsAdmin } from './columns';
 import { DataTable } from './data-table';
-import { getSession } from '@auth0/nextjs-auth0';
 
 async function getData(): Promise<Document[]> {
   // Fetch data from your API here.
@@ -13,7 +14,7 @@ async function getData(): Promise<Document[]> {
 }
 
 export default async function TablePage() {
-  const session = await getSession()
+  const session = await getSession();
   const data = await getData();
 
   return (

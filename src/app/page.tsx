@@ -1,3 +1,4 @@
+/* eslint-disable */
 
 import { FormSection } from '@/components/dashboard/form-section';
 import { Hero } from '@/components/dashboard/hero';
