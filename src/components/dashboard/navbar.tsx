@@ -10,7 +10,7 @@ export const Icons = {
 
 export const Navbar = () => {
   return (
-    <div className="px-[10px] md:px-0 py-2 border-b w-full z-10 top-0">
+    <div className="px-[10px] md:px-0 py-2 border-b md:w-full z-10 top-0">
       <div className="md:container flex items-center justify-between mx-auto">
         <Image src="/kemenhub.png" width={50} height={50} alt="logo kemenhub" />
         <div className="flex items-center md:gap-[28px]">
