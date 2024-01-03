@@ -72,7 +72,7 @@ export function DataTable<TData, TValue>({
     <>
       {/* Filters */}
 
-      <div className="flex items-center justify-between font-poppins">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between font-poppins">
         <div className="flex items-center py-4">
           <Input
             placeholder="Cari peraturan..."
