@@ -107,7 +107,7 @@ export const columns: ColumnDef<Document>[] = [
           <DropdownMenuContent className="flex flex-col gap-3 items-center justify-center">
             <DropdownMenuLabel>Action</DropdownMenuLabel>
             <Button>
-              <Link href={dokumen.link} className="ml-[8px]">
+              <Link href={dokumen.link} target="_blank" className="ml-[8px]">
                 Kunjungi
               </Link>
             </Button>
